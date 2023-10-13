@@ -1,0 +1,210 @@
+x = 1 + 1
+y = 2 * x
+z <- x + y
+
+install.packages("tidyverse")
+library(tidyverse)
+
+my.weight <- 65
+my.weight == 65
+my.weight != 70
+my.weight <=65
+my.weight > 70
+
+course <- c("SOCS0100", "SOCS0079","SOCS0081")
+course
+
+grades <- c(60,63,65)
+
+x <- c(10,14,18)
+x
+length(x)
+x
+typeof(x)
+
+p <- c(0.5, 1.5)
+p
+typeof(p)
+
+beatles <- c("Lennon","McCartney","Harrison","Starr")
+typeof(beatles)
+
+#start:end
+s<- 5:10
+s
+length(s)
+
+seq(10,15)
+seq(from=10,to=15,by=1)
+seq(from=100,to=150,by=10)
+
+p <- c(3:10)
+p
+mean(p)
+p * 2
+
+c(2,1,1)+c(1,0,2)
+c(1,1,3)*c(1,0,2)
+
+a <- list(1,2,3)
+typeof(a)
+length(a)
+str(a)
+
+a <- list(c(1,2),c(-1,0,5))
+str(a)
+
+b <- list(5,6,"beatles", TRUE)
+typeof(b)
+length(b)
+str(b)
+
+l1 <- list(c(5,6),list("beatles","radiohead"),list(10,20,30))
+str(c)
+
+l2 <- list(a=c(5,6),b=list("beatles","radiohead"),c=list(10,20))
+l2$a
+typeof(l2$a)
+length(l2$a)
+typeof(l2$b)
+length(l2$b)
+
+candidate <- c("Biden","Harris","Trump","Pence")
+age <- c(78,56,74,61)
+mean(age)
+
+c(candidate,age)
+list(candidate,age)
+
+data.frame(candidate,age)
+
+df <- data.frame(candidate,age)
+summary(df)
+
+sex <- c("Male","Female","Male","Male")
+sex
+factor(sex)
+
+df <- data.frame(candidate,age,sex = factor(sex))
+df
+
+#View() function to display the data frame
+longley$Year
+longley$Population
+
+longley[5,] #brings the 5th row
+longley[,6] #brings the 6th column
+longley[1:2, ] #brings the first two rows
+longley[1:2,c(5,6)] #brings the 5th & 6th column of 1st two rows
+
+df$tax_return <- factor(c("Yes","Yes","No",NA))
+df$tax_return
+sum(c(1,2,3,NA))
+sum(c(1,2,3,NA), na.rm = TRUE)
+#NA is not a level
+
+df
+
+is.na(df) #to determine if a value is missing
+
+#IF statement
+#A test/condition is this statement true or false
+#If the statement A is true, then do B; if false, then do C (optional)
+#IF (A = TRUE)
+#Then B
+#Else C
+#End IF
+number <- 10
+if(number > 9){
+print("Bingo")
+} else {
+print("Nah")
+}
+
+#functions
+name <- function(argument_1, argument_2,...){
+  command
+  return(value)
+}
+
+df
+
+find_biden_age <- function(data){
+  biden_age <- data[data$candidate == "Biden", "age"]
+  return(biden_age)
+}
+find_biden_age(df)
+
+#loops
+for (time in c(1:5)) {
+print(c("The course will", "finish", "in", time, "minutes"))
+}
+
+#importing data
+rm(list = ls()) #rm()function in R is used to delete objects fromt the memory
+setwd ("~/Desktop/R_Workshop") #Setting the working directory
+load("gss2016.RData") #Importing data
+
+names(gss)
+dim(gss)
+
+male <- gss[gss$sex == 1, ]
+dim(male)
+
+female <- gss[gss$sex == 2, 1:3]
+dim(female)
+black_female <- gss[gss$sex == 2 & gss$race ==2, ]
+dim(black_female)
+
+trust_inst <- subset(gss, select=c("confinan","conbus","conclerg","coneduc",
+                                   "conpress","contv","conjudge","consci"))
+names(trust_inst)
+
+library(tidyverse)
+
+trust_inst <- select(gss, confinan, conbus, sex, race)
+gss_race <- filter(gss, race == 1)
+gss_filter <- filter(gss, sex == 1, marital %in% 2:4)
+
+#rename(obj_name, new_name = old_name,...)
+rename(gss, sexual_info = sex)
+
+m<- gss %>% select(age, race, sex) %>% mutate(age_2 = age^2) %>%
+  rename(ethnicity = race)
+head(m, 3)
+
+hist(gss$age)
+
+plot(longley$Year,longley$GNP, type="l")
+
+#ggplot(data = , aes (x =, y = )) + geom_line()
+
+install.packages("gapminder")
+library(gapminder)
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap, y = lifeExp))
+p + geom_point()
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y=lifeExp))
+p + geom_point() + geom_smooth()
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y=lifeExp))
+p + geom_point() + geom_smooth() +
+  scale_x_log10()
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y=lifeExp))
+p + geom_point(color = "orange") + 
+    geom_smooth() +
+    scale_x_log10()
+
+
+
+
+
